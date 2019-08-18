@@ -1,0 +1,15 @@
+{
+  "name": "ipslinker",
+  "version": "1.0.0",
+  "description": "Ten bot służy do obsługi forum Strefy. Jak ktoś wypierdoli ten katalog to skończy jako brutally wounded, hehe.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Meehoweq",
+  "license": "All Rights Kurwa Reserved",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "discord.js": "^11.4.2"
+  }
+}
