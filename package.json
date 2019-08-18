@@ -9,7 +9,7 @@
   "author": "Meehoweq",
   "license": "All Rights Kurwa Reserved",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "discord.js": "^11.4.2"
   }
 }
