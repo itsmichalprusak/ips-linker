@@ -12,12 +12,12 @@ client.on('ready', () => {
 client.on('message', message => {
   if (message.channel.id !== config.channelId) return
   if (message.content === '!help') {
-    message.channel.send('Dostępne komendy: \`!debug, !wahadło\`')
-  } else if (message.content.startsWith('!debug')) {
-    let member = message.content.replace('!debug ', '')
-    if (!member || member === '!debug') return message.channel.send('Nie podano nazwy użytkownika.')
+    message.channel.send('Dostępne komendy: \`!userinfo\`')
+  } else if (message.content.startsWith('!userinfo')) {
+    let member = message.content.replace('!userinfo ', '')
+    if (!member || member === '!userinfo') return message.channel.send('Nie podano nazwy użytkownika.')
 
-    axios.get(`https://forum.strefarp.pl/api/core/members?name=${member}&key=${config.ipsApiToken}`)
+    axios.get(`${config.ipsUrl}/api/core/members?name=${member}&key=${config.ipsApiToken}`)
       .then(response => {
         let member = response.data.results[0]
         if (!member) return message.channel.send(`Użytkownik **${member}** nie istnieje.`)
@@ -57,33 +57,6 @@ client.on('message', message => {
       .catch(error => {
         message.channel.send(error.message)
       })
-  } else if (message.content.startsWith('!wahadło')) {
-    let kogoWyjebacWkosmos = message.content.replace('!wahadło ', '')
-    if (!kogoWyjebacWkosmos || kogoWyjebacWkosmos == '!wahadło')
-      return message.channel.send('Kogo wyjebać w kosmos? Zdecyduj się...')
-
-    let guild = message.guild
-    let properMember = null
-
-    guild.members.forEach(member => {
-      if (member.displayName === kogoWyjebacWkosmos) properMember = member
-    })
-
-    if (!properMember) return message.channel.send('Jak my nawet takiego typa na Discordzie nie mamy.')
-
-    if (properMember.id === guild.ownerID) return message.channel.send('Don Bulim chcesz szamotać? Pojebało?')
-
-    let originVoiceChannelId = properMember.voiceChannelID
-
-    if (!originVoiceChannelId) return message.channel.send('Petent nie jest na żadnym kanale głosowym.')
-
-    properMember.setVoiceChannel('442390312774664206')
-      .then(() => properMember.setVoiceChannel('527524443564670976'))
-      .then(() => properMember.setVoiceChannel('428264266064330764'))
-      .then(() => properMember.setVoiceChannel('444176871886815233'))
-      .then(() => properMember.setVoiceChannel('476792717951631362'))
-      .then(() => properMember.setVoiceChannel(originVoiceChannelId))
-      .then(() => message.channel.send('Zrobione.'))
   }
 })
 
